@@ -35,22 +35,23 @@ Keychron Launcher works out of the box with no JSON import required, and support
 
 ### Option B: Build from source
 
-Set up your build environment and compile custom firmware:
+### 2. 펌웨어 컴파일 (Compile)
+QMK MSYS 터미널을 실행 후 본 디렉토리로 이동하여 아래 명령어를 실행합니다:
 
 ```bash
-python3 -m pip install qmk
-qmk setup Keychron/qmk_firmware
-qmk compile -kb keychron/q1_he/ansi_encoder -km keychron
-qmk flash -kb keychron/q1_he/ansi_encoder -km keychron
+# Keychron Q5 Max ANSI Encoder 타겟 펌웨어 빌드
+qmk compile -kb keychron/q5_max/ansi_encoder -km keychron
+# 또는
+make keychron/q5_max/ansi_encoder:keychron
 ```
 
-More build examples:
+빌드가 성공하면 `.build/` 디렉토리에 `keychron_q5_max_ansi_encoder_keychron.bin` 산출물이 생성됩니다.
 
-```bash
-make keychron/q1_he/ansi_encoder:keychron
-make keychron/k8_pro/ansi/rgb:keychron
-make keychron/v1_max/ansi_encoder:keychron:flash
-```
+---
+
+## 📖 문서 가이드 (Documentation)
+- [사용 및 관리자 가이드](./MANUAL.md): QMK MSYS 설정, 펌웨어 빌드 및 DFU 플래싱 절차
+- [개발 및 기능 분석 설계서](./docs/dev/implement_20260731_203400.md): 소스 구조 분석, 토글형 무한 반복 매크로 및 LED Heatmap 기능 설계
 
 See the [QMK build environment setup](https://docs.qmk.fm/#/getting_started_build_tools) and [make guide](https://docs.qmk.fm/#/getting_started_make_guide) for details. New to QMK? Start with the [Complete Newbs Guide](https://docs.qmk.fm/#/newbs).
 
