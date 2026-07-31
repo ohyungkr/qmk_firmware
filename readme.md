@@ -1,7 +1,8 @@
 # Keychron Q5 Max QMK VIA 펌웨어 저장소
 
 본 저장소는 **Keychron Q5 Max (ANSI Encoder 배열)** 키보드의 QMK VIA 호환 커스텀 펌웨어 빌드 환경 및 소스코드를 관리하는 프로젝트입니다.  
-Keychron 공식 무선 QMK 레포지토리(`wireless_playground` 브랜치)를 기반으로 구성되었습니다.
+Keychron 공식 무선 QMK 레포지토리(`wireless_playground` 브랜치)를 [ohyungkr/qmk_firmware](https://github.com/ohyungkr/qmk_firmware)로 포크(Fork)하여 개인 관리 중입니다.
+
 
 ---
 
