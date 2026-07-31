@@ -20,8 +20,8 @@ bool SOLID_REACTIVE_MULTIWIDE_RANDOM(effect_params_t* params) {
 
             uint16_t effect = tick + dist * 5;
             if (effect < 255) {
-                // 타건 지점 및 타임스탬프 기반 고정 무작위 HUE 생성 (Fade 중 색상 변동 없음)
-                uint8_t hit_hue = (uint8_t)(g_last_hit_tracker.x[j] * 13 + g_last_hit_tracker.y[j] * 29 + g_last_hit_tracker.tick[j] * 101 + 37);
+                // 타건 이벤트 시점(g_last_hit_tracker.tick[j])만으로 단 하나의 고정 무작위 단색 HUE 생성 (파동 전체가 한 가지 색으로 유지)
+                uint8_t hit_hue = (uint8_t)(g_last_hit_tracker.tick[j] * 167 + 53);
                 hsv.h = hit_hue;
                 hsv.v = qadd8(hsv.v, 255 - effect);
             }

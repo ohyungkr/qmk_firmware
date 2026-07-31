@@ -12,7 +12,7 @@ bool SOLID_REACTIVE_SIMPLE_RANDOM(effect_params_t* params) {
         uint16_t tick = max_tick;
         uint16_t raw_hit_tick = 0;
 
-        // 가장 최근 타건 틱 찾기
+        // 해당 LED의 가장 최근 타건 기록 탐색
         for (int8_t j = g_last_hit_tracker.count - 1; j >= 0; j--) {
             if (g_last_hit_tracker.index[j] == i && g_last_hit_tracker.tick[j] < tick) {
                 tick = g_last_hit_tracker.tick[j];
@@ -26,8 +26,8 @@ bool SOLID_REACTIVE_SIMPLE_RANDOM(effect_params_t* params) {
 
         hsv_t hsv = rgb_matrix_config.hsv;
         if (offset < 255 && tick < max_tick) {
-            // 타건 시점의 고정 틱과 LED 인덱스를 조합한 고정 무작위 HUE (Fade 중 색상 변동 없음)
-            hsv.h = (uint8_t)(raw_hit_tick * 167 + i * 97 + 53);
+            // 타건 시점(raw_hit_tick)의 시드만으로 단 하나의 고정 무작위 단색 HUE 생성 (시작부터 끝까지 한 가지 색만 유지)
+            hsv.h = (uint8_t)(raw_hit_tick * 167 + 53);
             hsv.v = scale8(255 - offset, hsv.v);
         } else {
             hsv.v = 0;
