@@ -114,3 +114,8 @@ via*.json
 
 # Keep firmware file
 !keyboards/keychron/*/firmware/*.bin
+
+# User Global Security Rules
+./docs
+./.agent
+

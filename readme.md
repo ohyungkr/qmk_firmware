@@ -1,36 +1,36 @@
-# Quantum Mechanical Keyboard Firmware
+# Keychron Q5 Max QMK VIA 펌웨어 저장소
 
-[![Current Version](https://img.shields.io/github/tag/qmk/qmk_firmware.svg)](https://github.com/qmk/qmk_firmware/tags)
-[![Discord](https://img.shields.io/discord/440868230475677696.svg)](https://discord.gg/Uq7gcHh)
-[![Docs Status](https://img.shields.io/badge/docs-ready-orange.svg)](https://docs.qmk.fm)
-[![GitHub contributors](https://img.shields.io/github/contributors/qmk/qmk_firmware.svg)](https://github.com/qmk/qmk_firmware/pulse/monthly)
-[![GitHub forks](https://img.shields.io/github/forks/qmk/qmk_firmware.svg?style=social&label=Fork)](https://github.com/qmk/qmk_firmware/)
+본 저장소는 **Keychron Q5 Max (ANSI Encoder 배열)** 키보드의 QMK VIA 호환 커스텀 펌웨어 빌드 환경 및 소스코드를 관리하는 프로젝트입니다.  
+Keychron 공식 무선 QMK 레포지토리(`wireless_playground` 브랜치)를 기반으로 구성되었습니다.
 
-This is a keyboard firmware based on the [tmk\_keyboard firmware](https://github.com/tmk/tmk_keyboard) with some useful features for Atmel AVR and ARM controllers, and more specifically, the [OLKB product line](https://olkb.com), the [ErgoDox EZ](https://ergodox-ez.com) keyboard, and the Clueboard product line.
+---
 
-## Documentation
+## 📌 주요 특징
+- **키보드 모델**: Keychron Q5 Max (ANSI Layout + Knob Encoder)
+- **키보드 타겟**: `keychron/q5_max/ansi_encoder`
+- **키맵 타겟**: `via`
+- **컴파일 환경**: Windows 11 PowerShell + QMK MSYS
 
-* [See the official documentation on docs.qmk.fm](https://docs.qmk.fm)
+---
 
-The docs are powered by [Docsify](https://docsify.js.org/) and hosted on [GitHub](/docs/). They are also viewable offline; see [Previewing the Documentation](https://docs.qmk.fm/#/contributing?id=previewing-the-documentation) for more details.
+## 🛠️ 빠른 시작 (Quick Start)
 
-You can request changes by making a fork and opening a [pull request](https://github.com/qmk/qmk_firmware/pulls), or by clicking the "Edit this page" link at the bottom of any page.
+### 1. 전제 조건 (Prerequisites)
+- [QMK MSYS](https://msys.qmk.fm/) 설치 (Windows 11 환경)
+- [VIA](https://usevia.app/) 또는 [Keychron Launcher](https://launcher.keychron.com/) (펌웨어 플래싱 및 키맵 변경용)
 
-## Supported Keyboards
+### 2. 펌웨어 컴파일 (Compile)
+QMK MSYS 터미널을 실행 후 본 디렉토리로 이동하여 아래 명령어를 실행합니다:
 
-* [Planck](/keyboards/planck/)
-* [Preonic](/keyboards/preonic/)
-* [ErgoDox EZ](/keyboards/ergodox_ez/)
-* [Clueboard](/keyboards/clueboard/)
-* [Cluepad](/keyboards/clueboard/17/)
-* [Atreus](/keyboards/atreus/)
+```bash
+# Keychron Q5 Max ANSI Encoder 타겟 VIA 펌웨어 빌드
+qmk compile -kb keychron/q5_max/ansi_encoder -km via
+```
 
-The project also includes community support for [lots of other keyboards](/keyboards/).
+빌드가 성공하면 최상위 디렉토리 또는 `.build/` 디렉토리에 `keychron_q5_max_ansi_encoder_via.bin` 산출물이 생성됩니다.
 
-## Maintainers
+---
 
-QMK is developed and maintained by Jack Humbert of OLKB with contributions from the community, and of course, [Hasu](https://github.com/tmk). The OLKB product firmwares are maintained by [Jack Humbert](https://github.com/jackhumbert), the Ergodox EZ by [ZSA Technology Labs](https://github.com/zsa), the Clueboard by [Zach White](https://github.com/skullydazed), and the Atreus by [Phil Hagelberg](https://github.com/technomancy).
-
-## Official Website
-
-[qmk.fm](https://qmk.fm) is the official website of QMK, where you can find links to this page, the documentation, and the keyboards supported by QMK.
+## 📖 문서 가이드 (Documentation)
+- [사용 및 관리자 가이드](./docs/manual.md): QMK MSYS 설정, 키맵 수정 상세 방법 및 펌웨어 플래싱 절차
+- [개발 구현 기록](./docs/dev/implement_20260731_194748.md): 환경 구성 이력 및 빌드 타겟 알고리즘 정리
