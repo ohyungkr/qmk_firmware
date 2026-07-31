@@ -38,9 +38,9 @@
 #define M14 14
 #define M15 15
 
-// 무한 반복 매크로 사용자 키코드 정의 (파라미터 전달 방식)
+// 무한 반복 매크로 사용자 키코드 정의 (VIA customKeycodes 1:1 매핑)
 enum user_custom_keycodes {
-    RPT_M0 = QK_USER,
+    RPT_M0 = BAT_LVL + 1, // VIA customKeycodes 배열 인덱스 16번(BAT_LVL 다음)과 정확히 1:1 매핑
     RPT_M1,
     RPT_M2,
     RPT_M3,
@@ -57,6 +57,7 @@ enum user_custom_keycodes {
     RPT_M14,
     RPT_M15,
 };
+
 
 // 키맵에서 사용할 직관적 함수형 매크로 이름
 #define REPEAT(n) (RPT_M0 + (n))
