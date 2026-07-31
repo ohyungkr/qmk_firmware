@@ -33,8 +33,11 @@
 #include "typing_heatmap_anim.h"
 #include "digital_rain_anim.h"
 #include "solid_reactive_simple_anim.h"
+#include "solid_reactive_simple_random_anim.h"
 #include "solid_reactive_anim.h"
 #include "solid_reactive_wide.h"
+#include "solid_reactive_multiwide_random_anim.h"
+
 #include "solid_reactive_cross.h"
 #include "solid_reactive_nexus.h"
 #include "splash_anim.h"

@@ -57,8 +57,11 @@
             "rainbow_moving_chevron": true,
             "solid_reactive_multinexus": true,
             "solid_reactive_multiwide": true,
+            "solid_reactive_multiwide_random": true,
             "solid_reactive_simple": true,
+            "solid_reactive_simple_random": true,
             "solid_splash": true,
+
             "splash": true,
             "typing_heatmap": true
         }

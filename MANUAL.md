@@ -41,7 +41,15 @@ make keychron/q5_max/ansi_encoder:keychron
 
 ---
 
-## 3. 신규 커스텀 기능 분석 및 개발 가이드
+## 3. 신규 커스텀 기능 및 이펙트 안내
+- **무작위 반응형 RGB 이펙트 2종 추가**:
+  - `SOLID_REACTIVE_SIMPLE_RANDOM`: 단일 타건 키가 무작위(Random) 컬러로 점등 후 Fade-out.
+  - `SOLID_REACTIVE_MULTIWIDE_RANDOM`: 타건 시 무작위 컬러 파동이 퍼진 후 Fade-out.
+- **[개발 구현 기록 참조](./docs/dev/implement_20260731_204100.md)**: 소스코드 구조, 신규 애니메이션 구현 알고리즘 수록.
+
+---
+
+## 4. 기존 커스텀 기능 가이드
 
 상세한 소스코드 분석 및 알고리즘 설계는 **[개발 설계 문서 (implement_20260731_203400.md)](./docs/dev/implement_20260731_203400.md)**를 참조하시기 바랍니다.
 
