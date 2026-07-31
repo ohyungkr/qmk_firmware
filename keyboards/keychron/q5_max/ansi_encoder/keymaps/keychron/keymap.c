@@ -19,17 +19,13 @@
 #include "dynamic_keymap.h"
 #include <stdlib.h>
 
-// 타건 순간 1번만 rand() % 256 색상을 고정 저장하는 전역 배열
+// 키 타건 시 rand()로 선택된 1개의 무작위 고정 HUE 저장 배열
 uint8_t g_key_rand_hues[DRIVER_LED_TOTAL];
-uint8_t g_hit_rand_hues[256];
 
 bool rgb_matrix_record_key_press_user(uint8_t row, uint8_t col) {
     uint8_t led_index = g_target_matrix_to_led_line[row][col];
     if (led_index != NO_LED) {
-        g_key_rand_hues[led_index] = (uint8_t)(rand() % 256); // 타건 순간 딱 1번 rand() % 256 색상 선택
-    }
-    if (g_last_hit_tracker.count < 256) {
-        g_hit_rand_hues[g_last_hit_tracker.count] = (uint8_t)(rand() % 256);
+        g_key_rand_hues[led_index] = (uint8_t)rand(); // 타건 순간 rand()로 1개 무작위 색상 고정 선점
     }
     return true;
 }
