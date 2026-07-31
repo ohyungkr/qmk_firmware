@@ -13,11 +13,22 @@
    qmk setup
    ```
 
-### 1.2 소스코드 디렉토리 연결
+### 1.2 소스코드 디렉토리 연결 및 Git Remote
 QMK MSYS 터미널에서 작업 디렉토리로 이동합니다:
 ```bash
 cd /f/Programing/Keyboard/Keychron_Q5_Max
 ```
+
+- **개인 포크 저장소 (`origin`)**: `https://github.com/ohyungkr/qmk_firmware.git`
+- **공식 원본 저장소 (`upstream`)**: `https://github.com/Keychron/qmk_firmware.git`
+
+#### Keychron 공식 최신 코드 동기화 방법:
+```bash
+git fetch upstream wireless_playground
+git merge upstream/wireless_playground
+git push origin wireless_playground
+```
+
 
 ---
 
