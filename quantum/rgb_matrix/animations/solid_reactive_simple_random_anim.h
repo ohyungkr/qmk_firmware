@@ -4,7 +4,8 @@ RGB_MATRIX_EFFECT(SOLID_REACTIVE_SIMPLE_RANDOM)
 #        ifdef RGB_MATRIX_CUSTOM_EFFECT_IMPLS
 
 // 키 타건 시 rand()로 지정되어 고정된 1개의 무작위 HUE 배열
-extern uint8_t g_key_rand_hues[DRIVER_LED_TOTAL];
+extern uint8_t g_key_rand_hues[];
+
 
 bool SOLID_REACTIVE_SIMPLE_RANDOM(effect_params_t* params) {
     RGB_MATRIX_USE_LIMITS(led_min, led_max);

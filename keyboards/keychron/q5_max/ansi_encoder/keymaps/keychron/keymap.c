@@ -19,18 +19,26 @@
 #include "dynamic_keymap.h"
 #include <stdlib.h>
 
+#ifdef RGB_MATRIX_ENABLE
+#    include "rgb_matrix.h"
+#    ifndef DRIVER_LED_TOTAL
+#        define DRIVER_LED_TOTAL RGB_MATRIX_LED_COUNT
+#    endif
+
 // 키 타건 시 rand()로 선택된 1개의 무작위 고정 HUE 저장 배열
 uint8_t g_key_rand_hues[DRIVER_LED_TOTAL];
 
 bool rgb_matrix_record_key_press_user(uint8_t row, uint8_t col) {
-    uint8_t led_index = g_target_matrix_to_led_line[row][col];
-    if (led_index != NO_LED) {
+    uint8_t led_index = g_led_config.matrix_co[row][col];
+    if (led_index != NO_LED && led_index < DRIVER_LED_TOTAL) {
         g_key_rand_hues[led_index] = (uint8_t)rand(); // 타건 순간 rand()로 1개 무작위 색상 고정 선점
     }
     return true;
 }
+#endif
 
 // 매크로 인덱스 정의
+
 
 
 
