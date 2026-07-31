@@ -3,6 +3,8 @@
 RGB_MATRIX_EFFECT(SOLID_REACTIVE_MULTIWIDE_RANDOM)
 #        ifdef RGB_MATRIX_CUSTOM_EFFECT_IMPLS
 
+extern uint8_t random_key_hue[DRIVER_LED_TOTAL];
+
 bool SOLID_REACTIVE_MULTIWIDE_RANDOM(effect_params_t* params) {
     RGB_MATRIX_USE_LIMITS(led_min, led_max);
 
@@ -20,9 +22,10 @@ bool SOLID_REACTIVE_MULTIWIDE_RANDOM(effect_params_t* params) {
 
             uint16_t effect = tick + dist * 5;
             if (effect < 255) {
-                // 타건 이벤트 시점(g_last_hit_tracker.tick[j])만으로 단 하나의 고정 무작위 단색 HUE 생성 (파동 전체가 한 가지 색으로 유지)
-                uint8_t hit_hue = (uint8_t)(g_last_hit_tracker.tick[j] * 167 + 53);
-                hsv.h = hit_hue;
+                uint8_t hit_led = g_last_hit_tracker.index[j];
+                // 타건 시점 rand()로 결정된 단 하나의 무작위 고정 HUE 사용
+                hsv.h = random_key_hue[hit_led];
+                hsv.s = 255;
                 hsv.v = qadd8(hsv.v, 255 - effect);
             }
         }

@@ -17,6 +17,11 @@
 #include QMK_KEYBOARD_H
 #include "keychron_common.h"
 #include "dynamic_keymap.h"
+#include <stdlib.h>
+
+// 순수 rand() 무작위 반응형 LED 상태 트래킹 배열
+uint8_t random_key_hue[DRIVER_LED_TOTAL] = {0};
+uint8_t random_key_val[DRIVER_LED_TOTAL] = {0};
 
 // 매크로 인덱스 정의
 #define M0  0
@@ -67,6 +72,15 @@ static uint32_t repeat_macro_timer = 0;
 #endif
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    if (record->event.pressed) {
+        // 키를 누르는 순간 해당 키의 LED 인덱스를 찾아 rand()로 단 1개의 무작위 고정 HUE 할당
+        uint8_t led_idx = g_target_matrix_to_led_line[record->event.key.row][record->event.key.col];
+        if (led_idx != NO_LED) {
+            random_key_hue[led_idx] = rand() % 256;
+            random_key_val[led_idx] = 255;
+        }
+    }
+
     if (keycode >= RPT_M0 && keycode <= RPT_M15) {
         if (record->event.pressed) {
             int8_t target_macro = keycode - RPT_M0;
@@ -81,6 +95,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
     return true;
 }
+
 
 void matrix_scan_user(void) {
     if (active_repeat_macro >= 0 && timer_elapsed32(repeat_macro_timer) >= REPEAT_MACRO_INTERVAL_MS) {
