@@ -6,11 +6,15 @@ RGB_MATRIX_EFFECT(SOLID_REACTIVE_SIMPLE_RANDOM)
 static hsv_t SOLID_REACTIVE_SIMPLE_RANDOM_math(hsv_t hsv, uint16_t offset) {
     if (offset > 255) offset = 255;
 
-    // 타건 시점 시드로 무작위 H(색상)와 무작위 S(채도) 선정
+    // g_last_hit_tracker.tick[0]은 프레임마다 증가하는 경과 시간이므로,
+    // (g_rgb_timer - tick) 연산으로 키가 눌린 '고정 시각(Timestamp)'을 도출합니다.
     uint16_t hit_tick = g_last_hit_tracker.tick[0];
-    hsv.h = (uint8_t)(hit_tick * 167 + 53);                // Random H (0~255)
-    hsv.s = (uint8_t)(128 + ((hit_tick * 97 + 31) % 128)); // Random S (128~255 풍부한 채도)
-    hsv.v = scale8(255 - offset, hsv.v);                   // V(밝기)만 시간이 지나면서 Fadeout
+    uint16_t press_timestamp = g_rgb_timer - hit_tick;
+
+    // 키를 누른 그 시점의 고정 시드로 H(색상)와 S(채도) 결정 (소멸 중 색상 변동 전혀 없음)
+    hsv.h = (uint8_t)(press_timestamp * 167 + 53);
+    hsv.s = (uint8_t)(128 + ((press_timestamp * 97 + 31) % 128));
+    hsv.v = scale8(255 - offset, hsv.v); // V(밝기)만 255 -> 0으로 Fadeout
 
     return hsv;
 }
