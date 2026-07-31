@@ -42,10 +42,15 @@ make keychron/q5_max/ansi_encoder:keychron
 ---
 
 ## 3. 신규 커스텀 기능 및 이펙트 안내
+- **무한 반복 매크로 키코드 (`REPEAT(M0)` ~ `REPEAT(M15)`)**:
+  - `keymap.c` 레이아웃에서 `REPEAT(M0)`, `REPEAT(M1)` 형태로 지정.
+  - 한 번 클릭 시 해당 VIA 매크로 무한 반복 시작, 다시 클릭 시 즉시 취소/중지.
+  - **[무한 매크로 개발 기록 참조](./docs/dev/implement_20260731_204900.md)**
 - **무작위 반응형 RGB 이펙트 2종 추가**:
   - `SOLID_REACTIVE_SIMPLE_RANDOM`: 단일 타건 키가 무작위(Random) 컬러로 점등 후 Fade-out.
   - `SOLID_REACTIVE_MULTIWIDE_RANDOM`: 타건 시 무작위 컬러 파동이 퍼진 후 Fade-out.
-- **[개발 구현 기록 참조](./docs/dev/implement_20260731_204100.md)**: 소스코드 구조, 신규 애니메이션 구현 알고리즘 수록.
+  - **[RGB 개발 구현 기록 참조](./docs/dev/implement_20260731_204100.md)**
+
 
 ---
 

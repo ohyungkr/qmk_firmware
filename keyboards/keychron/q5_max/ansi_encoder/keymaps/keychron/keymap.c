@@ -16,6 +16,78 @@
 
 #include QMK_KEYBOARD_H
 #include "keychron_common.h"
+#include "dynamic_keymap.h"
+
+// 매크로 인덱스 정의
+#define M0  0
+#define M1  1
+#define M2  2
+#define M3  3
+#define M4  4
+#define M5  5
+#define M6  6
+#define M7  7
+#define M8  8
+#define M9  9
+#define M10 10
+#define M11 11
+#define M12 12
+#define M13 13
+#define M14 14
+#define M15 15
+
+// 무한 반복 매크로 사용자 키코드 정의 (파라미터 전달 방식)
+enum user_custom_keycodes {
+    RPT_M0 = QK_USER,
+    RPT_M1,
+    RPT_M2,
+    RPT_M3,
+    RPT_M4,
+    RPT_M5,
+    RPT_M6,
+    RPT_M7,
+    RPT_M8,
+    RPT_M9,
+    RPT_M10,
+    RPT_M11,
+    RPT_M12,
+    RPT_M13,
+    RPT_M14,
+    RPT_M15,
+};
+
+// 키맵에서 사용할 직관적 함수형 매크로 이름
+#define REPEAT(n) (RPT_M0 + (n))
+
+// 무한 반복 매크로 제어 변수
+static int8_t  active_repeat_macro  = -1;
+static uint32_t repeat_macro_timer = 0;
+#ifndef REPEAT_MACRO_INTERVAL_MS
+#    define REPEAT_MACRO_INTERVAL_MS 100
+#endif
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    if (keycode >= RPT_M0 && keycode <= RPT_M15) {
+        if (record->event.pressed) {
+            int8_t target_macro = keycode - RPT_M0;
+            if (active_repeat_macro == target_macro) {
+                active_repeat_macro = -1; // 동일 매크로 재타건 시 중지/취소
+            } else {
+                active_repeat_macro = target_macro; // 매크로 무한 반복 시작
+                repeat_macro_timer  = timer_read32();
+            }
+        }
+        return false;
+    }
+    return true;
+}
+
+void matrix_scan_user(void) {
+    if (active_repeat_macro >= 0 && timer_elapsed32(repeat_macro_timer) >= REPEAT_MACRO_INTERVAL_MS) {
+        repeat_macro_timer = timer_read32();
+        dynamic_keymap_macro_send(active_repeat_macro);
+    }
+}
 
 enum layers {
     MAC_BASE,
@@ -23,6 +95,7 @@ enum layers {
     WIN_BASE,
     WIN_FN,
 };
+
 
 #define FN_MAC MO(MAC_FN)
 #define FN_WIN MO(WIN_FN)
