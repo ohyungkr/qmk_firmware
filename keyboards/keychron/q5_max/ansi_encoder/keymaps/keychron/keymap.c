@@ -17,24 +17,9 @@
 #include QMK_KEYBOARD_H
 #include "keychron_common.h"
 #include "dynamic_keymap.h"
-#include <stdlib.h>
-
-// 무작위 반응형 RGB 이펙트용 단일 rand() HUE 저장 배열
-uint8_t g_key_rand_hues[DRIVER_LED_TOTAL];
-uint8_t g_hit_rand_hues[256];
-
-bool rgb_matrix_record_key_press_user(uint8_t row, uint8_t col) {
-    uint8_t led_index = g_target_matrix_to_led_line[row][col];
-    if (led_index != NO_LED) {
-        g_key_rand_hues[led_index] = (uint8_t)rand(); // 타건 순간 단 1개의 rand() 무작위 색상 선택
-    }
-    if (g_last_hit_tracker.count < 256) {
-        g_hit_rand_hues[g_last_hit_tracker.count] = (uint8_t)rand();
-    }
-    return true;
-}
 
 // 매크로 인덱스 정의
+
 
 #define M0  0
 #define M1  1
