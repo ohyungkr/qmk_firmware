@@ -66,7 +66,7 @@ enum user_custom_keycodes {
 static int8_t  active_repeat_macro  = -1;
 static uint32_t repeat_macro_timer = 0;
 #ifndef REPEAT_MACRO_INTERVAL_MS
-#    define REPEAT_MACRO_INTERVAL_MS 100
+#    define REPEAT_MACRO_INTERVAL_MS 500
 #endif
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
